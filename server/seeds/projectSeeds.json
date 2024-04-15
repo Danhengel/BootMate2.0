@@ -1,0 +1,23 @@
+[
+    {
+        "name": "Capstone Project",
+        "baseLanguage": "Java",
+        "openCollab": true,
+        "description": "A capstone project for a computer science degree.",
+        "student": "660b3ad435ff03c6031294e0"
+    },
+    {
+        "name": "Machine Learning Research",
+        "baseLanguage": "Python",
+        "openCollab": false,
+        "description": "A research project on machine learning.",
+        "student": "660b3ad435ff03c6031294df"
+    },
+    {
+        "name": "Web Development Bootcamp",
+        "baseLanguage": "Javascript",
+        "openCollab": true,
+        "description": "A bootcamp for web development.",
+        "student": "660b3ad435ff03c6031294de"
+    }
+]
