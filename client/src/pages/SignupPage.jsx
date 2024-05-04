@@ -3,29 +3,28 @@ import { useMutation } from "@apollo/client";
 import Auth from "../utils/auth";
 import { ADD_STUDENT } from "../utils/mutations";
 import {
-  ButtonGroup,
+  Heading,
+  Box,
   Button,
+  FormControl,
+  FormLabel,
   Input,
+  VStack,
+  Flex,
+  Image as ChakraImage,
+  Link as ChakraLink,
+  Container,
+  Stack,
   InputGroup,
   InputLeftElement,
-  RadioGroup,
-  Radio,
-  Stack,
-  Container,
-  Heading,
-  Text,
-  Box,
+  ButtonGroup,
 } from "@chakra-ui/react";
+import bgImage from '../assets/background4.jpg';
+import bootmateLogo from '../assets/bootmate-logo.png';
 
 function SignupPage() {
-  const [formState, setFormState] = useState({ email: "", password: "" });
+  const [formState, setFormState] = useState({ email: "", password: "", firstName: "", lastName: "", openEmploy: "" });
   const [addStudent] = useMutation(ADD_STUDENT);
-
-  const [file, setFile] = useState({ image: "" });
-  function handleUpload(e) {
-    console.log(e.target.files);
-    setFile(URL.createObjectURL(e.target.files[0]));
-  }
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -37,7 +36,6 @@ function SignupPage() {
           firstName: formState.firstName,
           lastName: formState.lastName,
           openEmploy: formState.openEmploy === "Yes" ? true : false,
-          image: file.image,
         },
       });
       const token = mutationResponse.data.addStudent.token;
@@ -56,101 +54,87 @@ function SignupPage() {
   };
 
   return (
-    <section>
-      <Container maxW="lg" centerContent>
-        <Heading mt="50px" mb="20px" fontSize="6xl">
-          BootMate()
-        </Heading>
-        <Heading mt="50px" mb="20px" fontSize="3xl">
-          Sign Up
-        </Heading>
-        <Stack spacing={3}>
-          <div className="signup-page">
-            <form onSubmit={handleFormSubmit}>
-              {/* <InputGroup>
-                <Text fontSize="2xl" p="5">
-                  Upload Profile Picture
-                </Text>
-                <Input
-                  name="image"
-                  type="file"
-                  id="image"
-                  onChange={handleUpload}
-                />
-                <img id="upload-preview" src={file} />
-              </InputGroup> */}
+    <Box>
+    <ChakraImage src={bgImage} alt="background image" />
+    <Container maxW="lg" centerContent>
+      <Box className="logo" mt="-250px"> {/* Adjust margin-top here */}
+        <ChakraImage src={bootmateLogo} alt="bootMate logo" />
+      </Box>
+      <Box className="container" style={{ backgroundImage: `url(${bgImage})` }}>
+        <Box className="popup-inner" mt="100px">
+          <Heading mt="50px" fontSize="3xl"> {/* Adjust margin-top here */}
+            Sign Up
+              </Heading>
+              <Stack spacing={3}>
+                <div className="signup-page">
+                  <form onSubmit={handleFormSubmit}>
+                    <InputGroup>
+                      <InputLeftElement pointerEvents="none" />
+                      <Input
+                        placeholder="First Name"
+                        name="firstName"
+                        type="text"
+                        id="firstName"
+                        onChange={handleChange}
+                      />
+                    </InputGroup>
 
-              <InputGroup>
-                <InputLeftElement pointerEvents="none"></InputLeftElement>
-                <Input
-                  placeholder="First Name"
-                  name="firstName"
-                  type="firstName"
-                  id="firstName"
-                  onChange={handleChange}
-                />
-              </InputGroup>
+                    <InputGroup>
+                      <InputLeftElement pointerEvents="none" />
+                      <Input
+                        placeholder="Last Name"
+                        name="lastName"
+                        type="text"
+                        id="lastName"
+                        onChange={handleChange}
+                      />
+                    </InputGroup>
 
-              <InputGroup>
-                <InputLeftElement pointerEvents="none"></InputLeftElement>
-                <Input
-                  placeholder="Last Name"
-                  name="lastName"
-                  type="lastName"
-                  id="lastName"
-                  onChange={handleChange}
-                />
-              </InputGroup>
+                    <InputGroup>
+                      <InputLeftElement pointerEvents="none" />
+                      <Input
+                        placeholder="Email"
+                        name="email"
+                        type="email"
+                        id="email"
+                        onChange={handleChange}
+                      />
+                    </InputGroup>
 
-              <InputGroup>
-                <InputLeftElement pointerEvents="none"></InputLeftElement>
-                <Input
-                  placeholder="Email"
-                  name="email"
-                  type="email"
-                  id="email"
-                  onChange={handleChange}
-                />
-              </InputGroup>
+                    <InputGroup>
+                      <InputLeftElement pointerEvents="none" />
+                      <Input
+                        placeholder="Password"
+                        name="password"
+                        type="password"
+                        id="pwd"
+                        onChange={handleChange}
+                      />
+                    </InputGroup>
 
-              <InputGroup>
-                <InputLeftElement pointerEvents="none"></InputLeftElement>
-                <Input
-                  placeholder="Password"
-                  name="password"
-                  type="password"
-                  id="pwd"
-                  onChange={handleChange}
-                />
-              </InputGroup>
+                    <InputGroup>
+                      <InputLeftElement pointerEvents="none" />
+                      <select
+                        name="openEmploy"
+                        id="openEmploy"
+                        onChange={handleChange}
+                      >
+                        <option value="">Are you open to employment opportunities?</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                      </select>
+                    </InputGroup>
 
-              <InputGroup>
-                <InputLeftElement pointerEvents="none"></InputLeftElement>
-                <select
-                  name="openEmploy"
-                  id="openEmploy"
-                  onChange={handleChange}
-                >
-                  <option value="">Are you open to employment oppurtunities?</option>
-                  <option value="Yes">Yes</option>
-                  <option value="No">No</option>
-                </select>
-              </InputGroup>
-
-              <Container maxW="lg" centerContent>
-                <Box>
-                  <ButtonGroup gap="4">
                     <Button colorScheme="blackAlpha" type="submit">
-                      Submit
-                    </Button>
-                  </ButtonGroup>
-                </Box>
-              </Container>
-            </form>
-          </div>
-        </Stack>
+                    Submit
+                  </Button>
+                </form>
+              </div>
+            </Stack>
+          </Box>
+        </Box>
       </Container>
-    </section>
+    </Box>
   );
 }
 
