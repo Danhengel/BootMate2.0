@@ -54,8 +54,9 @@ export default function HomePage() {
           </>
         ) : (
           <Box className="container" textAlign="center">
-            <Box className="logo" mt="-110">
-              <ChakraImage src={bootmateLogo} alt="bootMate logo" />
+            <Box className="logo">
+            <ChakraImage src={bootmateLogo} alt="bootMate logo" style={{ marginLeft: "auto", marginRight: "auto" }} />
+
               {seen ? <Login toggle={togglePop} /> : null}
             <Flex justifyContent="center">
               <ChakraLink as={RouterLink} to="/login">
